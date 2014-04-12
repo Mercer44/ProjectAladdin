@@ -1,4 +1,31 @@
 
+
+<?PHP
+function curPageName() 
+{
+ return substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/")+1);
+}
+
+/*FIND THE CURRENT ACTIVE PAGE. */
+
+include 'connect.php';
+
+
+
+$overviewActive = '';
+
+if (curPageName() == "index.php")
+{
+	$overviewActive = "class='active'";
+}
+if (curPageName() == "room.php")
+{
+	$notyet = '';
+}
+
+
+?>
+
 <nav class="navbar navbar-default" role="navigation">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -15,7 +42,7 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Overview</a></li>
+        <li <?PHP echo $overviewActive ?>><a href="/">Overview</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Floor 1<b class="caret"></b></a>
           <ul class="dropdown-menu">
