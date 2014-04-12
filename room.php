@@ -4,6 +4,7 @@
 <?PHP
 	require 'requirejs.php';
 	require 'requirecss.php';
+    require 'connection.php';
 ?>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Project Aladdin</title>
@@ -18,93 +19,96 @@
 </style>
 <?PHP
 	require 'nav.php';
+    $roomid = $_GET['id'];
 ?>
 </div>
 <div class="container-fluid">
 	<div class="row">
     	<div class="col-md-10 col-md-offset-1">
-        <div class="col-md-6">
-        	<div class="panel panel-primary">
+<?PHP
+$query = "Select * from RaspPi where Room_ID=". $roomid;
+$results = mysqli_query($link, $query);
+
+while ($ar = mysqli_fetch_array($results)) {
+    echo '<div class="col-md-6">
+            <div class="panel panel-primary">
             <div class="panel-heading"><span class="glyphicon glyphicon-hdd"> </span> Controller 1 </div>
-            	<div class="panel-body">
+                <div class="panel-body">
                 <h4>Lights</h4>
                 <hr />
-                <table class="table">
-               		<tr>
-                		<td><h5>Light 1</h5></td> 
-                    	<td><button type="button" class="btn btn-default active">Off</button> </td>
-                    	<td><button type="button" class="btn btn-primary">On</button></td>
-                	</tr>
-                    <tr>
-                		<td><h5>Light 2</h5></td> 
-                    	<td><button type="button" class="btn btn-default active">Off</button> </td>
-                    	<td><button type="button" class="btn btn-primary">On</button></td>
-                	</tr>
-                </table>
-        		<hr />
-        		<h4>Sound</h4>
+                <table class="table">';
+
+                    $query2 = "Select ID from Module where Pi_ID =".$ar['ID'];
+                    $results2 = mysqli_query($link, $query2);
+                    while($ar2 = mysqli_fetch_array($results2)) {
+
+                          $query3 = "Select * from Light_M where M_ID =".$ar2['ID'];
+                    $results3 = mysqli_query($link, $query3);
+                    while($ar3 = mysqli_fetch_array($results3)) {
+
+                    ;'<tr>';
+                        $lightId = $ar3['M_ID'];
+                        include 'lightmodules.php';
+                    echo'</tr>';
+                }
+                }
+                
+                echo '</table>
+                <hr />
+                <h4>Sound</h4>
                 <hr />
                 <table class="table">
-               		<tr>
-                		<td><h5>Speaker 1</h5></td> 
-                    	<td><button type="button" class="btn btn-default active">Off</button></td>
-                    	<td><button type="button" class="btn btn-primary">On</button></td>
-                	</tr>
+                    <tr>
+                        <td><h5>Speaker 1</h5></td> 
+                        <td><button type="button" class="btn btn-danger disabled">Off</button></td>
+                        <td><button type="button" class="btn btn-primary">On</button></td>
+                    </tr>
                 </table>
-       			<hr/>
-        		<h4>Motion</h4>
+                <hr/>
+                <h4>Motion</h4>
                 <hr />
                 <table class="table">
-               		<tr>
-                		<td><h5>Cam1</h5></td> 
-                    	<td><button type="button" class="btn btn-default active">Off</button></td>
-                    	<td><button type="button" class="btn btn-primary">On</button></td>
-                	</tr>
                     <tr>
-                    	<td></td>
-                    	<td>
+                        <td><h5>Cam1</h5></td> 
+                        <td><button type="button" class="btn btn-danger disabled">Off</button></td>
+                        <td><button type="button" class="btn btn-primary">On</button></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
                         <input type="text" class="input-medium form-control" placeholder="Set Time Interval"></td>
                         <td><button type="button" class="btn btn-primary">Update</button></td>
                     </tr>
                 </table>
-       			<hr />
+                <hr />
                 <h4>Temperature</h4>
                 <hr />
                 <table class="table">
-               		<tr>
-                		<td><h5>Sensor 1</h5></td> 
-                    	<td><h4>70ºF</h4></td>
-                    	<td><h4>30%</h4></td>
-                	</tr>
+                    <tr>
+                        <td><h5>Sensor 1</h5></td> 
+                        <td><h4>70ºF</h4></td>
+                        <td><h4>30%</h4></td>
+                    </tr>
                 </table>
-       			<hr />
+                <hr />
                 <h4>Door Lock</h4>
                 <hr />
                 <table class="table">
-               		<tr>
-                    	<td><h5>Front Door</h5></td>
-                		<td><button type="button" class="btn btn-default active">Lock</button></td>
-                    	<td><button type="button" class="btn btn-primary">Unlock</button></td>
-                	</tr>
+                    <tr>
+                        <td><h5>Front Door</h5></td>
+                        <td><button type="button" class="btn btn-danger disabled">Lock</button></td>
+                        <td><button type="button" class="btn btn-primary">Unlock</button></td>
+                    </tr>
                 </table>
-       			<hr />
+                <hr />
                 </div>
-			</div>
             </div>
-        <div class="col-md-6">
-        	<div class="panel panel-primary">
-            <div class="panel-heading"><span class="glyphicon glyphicon-hdd"> </span> Controller 2 </div>
-            	<div class="panel-body">
-                <h5>Light</h5> 
-        		<hr />
-        		<h5>Sound</h5><h4></h4>
-       			<hr/>
-        		<h5>Motion</h5><h4></h4>
-       			<hr />
-                </div>
-			</div>
-            </div>
-       	</div>
+            </div>';
+}
+
+?>
+        
+       
         </div>
     </div>
 </div>
