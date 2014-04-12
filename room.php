@@ -62,15 +62,31 @@
                 	</tr>
                     <tr>
                     	<td></td>
-                    	<td><div class="form-group"> <div class="col-md-10">
-                        <input type="text" class="form-control" placeholder="Set Time Interval"> </div></div></td>
+                    	<td>
+                        <input type="text" class="input-medium form-control" placeholder="Set Time Interval"></td>
                         <td><button type="button" class="btn btn-primary">Update</button></td>
                     </tr>
                 </table>
        			<hr />
                 <h4>Temperature</h4>
+                <hr />
+                <table class="table">
+               		<tr>
+                		<td><h5>Sensor 1</h5></td> 
+                    	<td><h4>70ºF</h4></td>
+                    	<td><h4>30%</h4></td>
+                	</tr>
+                </table>
        			<hr />
                 <h4>Door Lock</h4>
+                <hr />
+                <table class="table">
+               		<tr>
+                    	<td><h5>Front Door</h5></td>
+                		<td><button type="button" class="btn btn-default active">Lock</button></td>
+                    	<td><button type="button" class="btn btn-primary">Unlock</button></td>
+                	</tr>
+                </table>
        			<hr />
                 </div>
 			</div>
