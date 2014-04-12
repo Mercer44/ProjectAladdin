@@ -29,29 +29,39 @@
 $query = "Select * from RaspPi where Room_ID=". $roomid;
 $results = mysqli_query($link, $query);
 
+
+
+function query2($link, $ar) {
+    $query2 = "Select ID from Module where Pi_ID =".$ar['ID'];
+                $results2 = mysqli_query($link, $query2);
+                while($ar2 = mysqli_fetch_array($results2)) {
+
+                    $query3 = "Select * from Light_M where M_ID =".$ar2['ID'];
+                    $results3 = mysqli_query($link, $query3);
+                    while($ar3 = mysqli_fetch_array($results3)) {
+
+                    echo '<tr>';
+                        $lightId = $ar3['M_ID'];
+                        include 'lightmodules.php';
+                    echo'</tr>';
+                    }
+                }
+}
+
+
+
 while ($ar = mysqli_fetch_array($results)) {
+
+
     echo '<div class="col-md-6">
             <div class="panel panel-primary">
-            <div class="panel-heading"><span class="glyphicon glyphicon-hdd"> </span> Controller 1 </div>
+            <div class="panel-heading"><span class="glyphicon glyphicon-hdd"> </span> Controller '.$ar['ID'].' </div>
                 <div class="panel-body">
                 <h4>Lights</h4>
                 <hr />
                 <table class="table">';
 
-                    $query2 = "Select ID from Module where Pi_ID =".$ar['ID'];
-                    $results2 = mysqli_query($link, $query2);
-                    while($ar2 = mysqli_fetch_array($results2)) {
-
-                          $query3 = "Select * from Light_M where M_ID =".$ar2['ID'];
-                    $results3 = mysqli_query($link, $query3);
-                    while($ar3 = mysqli_fetch_array($results3)) {
-
-                    ;'<tr>';
-                        $lightId = $ar3['M_ID'];
-                        include 'lightmodules.php';
-                    echo'</tr>';
-                }
-                }
+                query2($link, $ar);
                 
                 echo '</table>
                 <hr />

@@ -2,16 +2,8 @@
 
 <script>
 
-<?php
-
-
-
-?>
-
-
-
 var update = function () {
-	$.get(<?php echo'"getit.php?id='.$lightId.'"'; ?>, function(data) {
+	$.get(<?php echo'"lightajax.php?id='.$lightId.'"'; ?>, function(data) {
 		if(data == 'true') {
 			document.getElementById(<?php echo '"on'.$lightId.'"'; ?>).disabled = false;
       document.getElementById(<?php echo '"off'.$lightId.'"'; ?>).disabled = true;
@@ -64,7 +56,7 @@ setInterval(update, 1000);
   <td><button type="button"id="off'.$lightId.'" class="btn btn-primary" onclick="changeState'.$lightId.'()" disabled>On</button></td>';
   }
   else {
-  	echo '<td><button type="button" id="on'.$lightId.'" class="btn btn-danger" onclick="changeState'.$lightId.'()" disabled>Off</button> </td>
+  	echo '<td><h5>Light '.$lightId.'</h5></td><td><button type="button" id="on'.$lightId.'" class="btn btn-danger" onclick="changeState'.$lightId.'()" disabled>Off</button> </td>
   <td><button type="button"id="off'.$lightId.'" class="btn btn-primary" onclick="changeState'.$lightId.'()"  >On</button></td>';
   }
 
