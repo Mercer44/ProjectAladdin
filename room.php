@@ -23,8 +23,7 @@
 ?>
 </div>
 <div class="container-fluid">
-	<div class="row">
-    	<div class="col-md-10 col-md-offset-1">
+	
 <?PHP
 $query = "Select * from RaspPi where Room_ID=". $roomid;
 $results = mysqli_query($link, $query);
@@ -49,9 +48,15 @@ function query2($link, $ar) {
 }
 
 
-
+    $counter = 0;
+    $complete = false;
 while ($ar = mysqli_fetch_array($results)) {
 
+    if($counter==0) {
+    echo '<div class="row">
+        <div class="col-md-10 col-md-offset-1">';
+        $complete = false;
+    }
 
     echo '<div class="col-md-6">
             <div class="panel panel-primary">
@@ -114,14 +119,28 @@ while ($ar = mysqli_fetch_array($results)) {
                 </div>
             </div>
             </div>';
+            if($counter==1) {
+              echo '    
+            </div>
+            </div>  
+            </div>
+            '; 
+            $counter = 0;
+            $complete = true;
+            }
+            else {
+            $counter++;
+            }
 }
+
+    if(!$complete) {
+        echo '</div></div></div>';
+    }
 
 ?>
         
        
-        </div>
-    </div>
-</div>
+ 
 
 <script type="text/javascript" src="dist/js/jquery-2.0.3.js"> </script>
 <script type="text/javascript" src="dist/js/bootstrap.js"> </script>
