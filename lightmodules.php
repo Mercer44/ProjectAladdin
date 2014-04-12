@@ -63,7 +63,6 @@ setInterval(update, 1000);
   ?>
 
 
-</body></html>
 
 
 

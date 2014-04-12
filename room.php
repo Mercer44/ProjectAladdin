@@ -99,18 +99,22 @@ while ($ar = mysqli_fetch_array($results)) {
                 <h4>Temperature</h4>
                 <hr />
                 <table class="table">
-                    <tr>
-                        <td><h5>Sensor 1</h5></td> 
-                        <td><h4>70ºF</h4></td>
-                        <td><h4>30%</h4></td>
-                    </tr>
+                    <tr>';
+                    $enQuery = 'Select Module.ID, Environment_M.M_ID from Module, Environment_M where Module.Pi_ID='.$ar['ID'].' and Environment_M.M_ID=Module.ID';
+                    $enResults = mysqli_query($link, $enQuery);
+                    while($enAr = mysqli_fetch_array($enResults)) {
+                    $enID= $enAr['M_ID'];
+                    include 'environmodules.php';
+                }
+                 echo  '</tr>
                 </table>
                 <hr />
                 <h4>Door Lock</h4>
                 <hr />
                 <table class="table">
                     <tr>';
-                       $lockQuery = 'Select Module.ID, Lock_M.M_ID, Lock_M.Time_Closed from Module, Lock_M where Module.Pi_ID='.$ar['ID'].' and Lock_M.M_ID=Module.ID';
+                      
+                     $lockQuery = 'Select Module.ID, Lock_M.M_ID from Module, Lock_M where Module.Pi_ID='.$ar['ID'].' and Lock_M.M_ID=Module.ID';
                        $lockResults = mysqli_query($link, $lockQuery);
                        while($arLock = mysqli_fetch_array($lockResults)) {
 
@@ -119,7 +123,6 @@ while ($ar = mysqli_fetch_array($results)) {
                         include 'lockmodules.php';
                     echo'</tr>';
                     }
-
 
                    echo'</tr>
                 </table>

@@ -11,8 +11,6 @@ var update = function () {
       
     }
     else {
-        
-      log(data);
       document.getElementById(<?php echo '"on'.$lockId.'"'; ?>).disabled = true;
       document.getElementById(<?php echo '"off'.$lockId.'"'; ?>).disabled = false;
         }
@@ -64,7 +62,6 @@ setInterval(update, 1000);
   ?>
 
 
-</body></html>
 
 
 
