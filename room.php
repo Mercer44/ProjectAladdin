@@ -109,11 +109,19 @@ while ($ar = mysqli_fetch_array($results)) {
                 <h4>Door Lock</h4>
                 <hr />
                 <table class="table">
-                    <tr>
-                        <td><h5>Front Door</h5></td>
-                        <td><button type="button" class="btn btn-danger disabled">Lock</button></td>
-                        <td><button type="button" class="btn btn-primary">Unlock</button></td>
-                    </tr>
+                    <tr>';
+                       $lockQuery = 'Select Module.ID, Lock_M.M_ID, Lock_M.Time_Closed from Module, Lock_M where Module.Pi_ID='.$ar['ID'].' and Lock_M.M_ID=Module.ID';
+                       $lockResults = mysqli_query($link, $lockQuery);
+                       while($arLock = mysqli_fetch_array($lockResults)) {
+
+                    echo '<tr>';
+                        $lockId = $arLock['M_ID'];
+                        include 'lockmodules.php';
+                    echo'</tr>';
+                    }
+
+
+                   echo'</tr>
                 </table>
                 <hr />
                 </div>
