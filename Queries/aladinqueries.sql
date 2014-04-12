@@ -75,7 +75,11 @@ FOREIGN KEY(Motion_ID) References Motion_M(M_ID)
 
 CREATE TABLE Motion_History(
 Motion_ID INT NOT NULL,
-Active_Time TIMESTAMP NOT NULL,
-Inactive_Time TIMESTAMP NOT NULL,
+Camera INT NOT NULL,
+File_Name VARCHAR(60) NOT NULL,
+Frame INT NOT NULL,
+File_Type INT NOT NULL,
+Time_Stamp TIMESTAMP NOT NULL,
+Text_Event TIMESTAMP NOT NULL,
 FOREIGN KEY(Motion_ID) References Motion_M(M_ID)
 );
