@@ -19,7 +19,7 @@ setInterval(update, 1000);
 
 </script>
 <?PHP
- $equery = "Select * from Environment_M where M_ID =" . $enID. " and M_ID > 0";
+ $equery = "Select * from Environment_M where M_ID =" . $enID. " and RecordTime in (select MAX(RecordTime) from Environment_M where M_ID=".$enID.")";
  $eresults = mysqli_query($link, $equery) or die("Error: ".mysqli_error($link));
  while($ear = mysqli_fetch_array($eresults)) {
  	echo '<td><h5>Sensor '.$enID.'</h5></td> 
