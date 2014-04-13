@@ -5,13 +5,13 @@ $lightId = $_GET['id'];
 require 'connection.php';
 
 
-  $query = "Select * from light_m where M_ID=" . $lightId;
+  $queryli = "Select * from Light_M where M_ID=" . $lightId;
 
-  $results = mysqli_query($link, $query);
+  $resultsli = mysqli_query($link, $queryli);
 
-  $ar = mysqli_fetch_array($results);
+  $arli = mysqli_fetch_array($resultsli);
  
-  if($ar['State']) {
+  if($arli['State']) {
       echo 'true';
   }
   else {

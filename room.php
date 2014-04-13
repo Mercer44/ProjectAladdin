@@ -4,7 +4,7 @@
 <?PHP
 	require 'requirejs.php';
 	require 'requirecss.php';
-    require 'connect.php';
+    require 'connection.php';
 ?>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Project Aladdin</title>
@@ -128,9 +128,9 @@ while ($ar = mysqli_fetch_array($results)) {
                 <table class="table">
                     <tr>';
                     $enQuery = 'Select Module.ID, Environment_M.M_ID from Module, Environment_M where Module.Pi_ID='.$ar['ID'].' and Environment_M.M_ID=Module.ID';
-                    $enResults = mysqli_query($link, $enQuery);
+                    $enResults = mysqli_query($link, $enQuery) or die("Error: ".mysqli_error($link));
                     while($enAr = mysqli_fetch_array($enResults)) {
-                    $enID= $enAr['M_ID'];
+                    $enID = $enAr['M_ID'];
                     include 'environmodules.php';
                 }
                  echo  '</tr>

@@ -43,9 +43,9 @@ setInterval(update, 1000);
 <?php
 
 
-  $query5 = "Select * from light_m where M_ID =" . $lightId. "and M_ID > 0";
+  $query5 = "Select * from Light_M where M_ID =" . $lightId. " and M_ID > 0";
 
-  $results15 = mysqli_query($link, $query5);
+  $results15 = mysqli_query($link, $query5) or die("Error: ".mysqli_error($link));
 
   $ar14 = mysqli_fetch_array($results15);
  

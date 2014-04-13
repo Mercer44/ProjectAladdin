@@ -6,7 +6,7 @@ function curPageName()
 
 /*FIND THE CURRENT ACTIVE PAGE. */
 
-include 'connect.php';
+include 'connection.php';
 
 $overviewActive = '';
 $roomActive = '';

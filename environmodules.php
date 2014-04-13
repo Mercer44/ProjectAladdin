@@ -19,8 +19,8 @@ setInterval(update, 1000);
 
 </script>
 <?PHP
- $equery = "Select * from environment_m where M_ID =" . $enID. "and M_ID > 0";
- $eresults = mysqli_query($link, $equery);
+ $equery = "Select * from Environment_M where M_ID =" . $enID. " and M_ID > 0";
+ $eresults = mysqli_query($link, $equery) or die("Error: ".mysqli_error($link));
  while($ear = mysqli_fetch_array($eresults)) {
  	echo '<td><h5>Sensor '.$enID.'</h5></td> 
  <td><h4 id ="temp'.$enID.'">'.$ear['Temp'].'</h4></td>

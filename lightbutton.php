@@ -5,8 +5,8 @@
 
 require 'connection.php';
 
-  $query = "Update Light_M set state =". $state . " where M_ID=" .$id;
+  $querylit = "Update Light_M set State =". $state . " where M_ID=" .$id;
 
-  mysqli_query($link, $query);
+  mysqli_query($link, $querylit);
 
 ?>
