@@ -15,11 +15,11 @@ require 'connection.php';
 
   $x = mysqli_fetch_array($link, $piresults);
 
-  $ipquery = "Select INET_NTOA(IP) as ip from RaspPi where ID =" $x['Pi_ID'];
+//  $ipquery = "Select INET_NTOA(IP) as ip from RaspPi where ID =" $x['Pi_ID'];
 
-  $ipresults = mysqli_query($link, $ipquery);
+ // $ipresults = mysqli_query($link, $ipquery);
 
-  $y = mysqli_fetch_array($link, $ipresults);
+//  $y = mysqli_fetch_array($link, $ipresults);
 
 
 
