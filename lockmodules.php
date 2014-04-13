@@ -42,13 +42,13 @@ setInterval(update, 1000);
 <?php
 
 
-  $querylock = "Select * from lock_m where M_ID =" . $lockId;
+  $query = "Select * from lock_m where M_ID =" . $lockId. "and M_ID > 0";
 
-  $resultslock = mysqli_query($link, $querylock);
+  $results = mysqli_query($link, $query);
 
-  $arlock = mysqli_fetch_array($resultslock);
+  $ar = mysqli_fetch_array($results);
  
-  $yesno = $arlock['state'];
+  $yesno = $ar['state'];
 
   if($yesno) {
     echo '<td><h5>Lock '.$lockId.'</h5></td><td><button type="button" id="on'.$lockId.'" class="btn btn-danger" onclick="changeState'.$lockId.'()">Unlock</button> </td>

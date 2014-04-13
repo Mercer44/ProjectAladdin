@@ -43,13 +43,13 @@ setInterval(update, 1000);
 <?php
 
 
-  $query = "Select * from light_m where M_ID =" . $lightId;
+  $query5 = "Select * from light_m where M_ID =" . $lightId. "and M_ID > 0";
 
-  $results = mysqli_query($link, $query);
+  $results15 = mysqli_query($link, $query5);
 
-  $ar = mysqli_fetch_array($results);
+  $ar14 = mysqli_fetch_array($results15);
  
-  $yesno = $ar['State'];
+  $yesno = $ar14['State'];
 
   if($yesno) {
   	echo '<td><h5>Light '.$lightId.'</h5></td><td><button type="button" id="on'.$lightId.'" class="btn btn-danger" onclick="changeState'.$lightId.'()">Off</button> </td>

@@ -19,7 +19,7 @@ setInterval(update, 1000);
 
 </script>
 <?PHP
- $equery = "Select * from environment_m where M_ID =" . $enID;
+ $equery = "Select * from environment_m where M_ID =" . $enID. "and M_ID > 0";
  $eresults = mysqli_query($link, $equery);
  while($ear = mysqli_fetch_array($eresults)) {
  	echo '<td><h5>Sensor '.$enID.'</h5></td> 
