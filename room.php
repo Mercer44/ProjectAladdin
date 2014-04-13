@@ -4,32 +4,59 @@
 <?PHP
 	require 'requirejs.php';
 	require 'requirecss.php';
-    require 'connection.php';
+    require 'connect.php';
 ?>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Project Aladdin</title>
 </head>
 
 <body>
+<script type="text/javascript" src="dist/js/jquery-2.0.3.js"> </script> 
 <style type="text/css">
 .table>tbody>tr>th, .table>tbody>tr>td {
     border-top: none;
 	width: 170px;
 }
+
+.page-header {
+	margin-top: 20px;
+}
+
 </style>
 <?PHP
-	require 'nav.php';
-    $roomid = $_GET['id'];
+	//Either finds the right room or offers a sub
+	if ($_POST['SelectedItem'] == ""){
+		$queryRoomsID = "Select ID from Rooms where ID > 0 order by ID desc";
+		$resultsID = mysqli_query($link, $queryRoomsID);
+		while($roomsIDRow = mysqli_fetch_assoc($resultsID)){
+			$roomSub = $roomsIDRow['ID'];  
+		}
+	}
+	else{
+		$roomid = $_POST['SelectedItem'];	
+	}
+		
+	include 'nav.php';
+	$query = "Select * from RaspPi where Room_ID=". $roomid;
+	$results = mysqli_query($link, $query);
+	
+	$queryRoomInformation = "Select Rooms.Description as 'Room Description', Floors.Description as 'Floor Description' from RaspPi, Rooms, Floors where Room_ID=$roomid and Rooms.ID=RaspPi.Room_ID and Floors.ID=Rooms.Floor_ID";
+	$roomandfloorresults = mysqli_query($link, $queryRoomInformation);
+	while($roomandfloor = mysqli_fetch_assoc($roomandfloorresults)){
+		$RoomName = $roomandfloor['Room Description'];
+		$FloorName = $roomandfloor['Floor Description'];
+	}
+
 ?>
 </div>
 <div class="container-fluid">
-	
+<div class="col-md-10 col-md-offset-1">
+  <div class="page-header">
+    <h1><?PHP echo $RoomName ?><br />
+      <small><?PHP echo $FloorName ?></small></h1>
+  </div>
+</div>
 <?PHP
-$query = "Select * from RaspPi where Room_ID=". $roomid;
-$results = mysqli_query($link, $query);
-
-
-
 function query2($link, $ar) {
     $query2 = "Select ID from Module where Pi_ID =".$ar['ID'];
                 $results2 = mysqli_query($link, $query2);
@@ -149,15 +176,9 @@ while ($ar = mysqli_fetch_array($results)) {
     }
 
 ?>
-        
-       
- 
-
-<script type="text/javascript" src="dist/js/jquery-2.0.3.js"> </script>
-<script type="text/javascript" src="dist/js/bootstrap.js"> </script>
+<script type="text/javascript" src="dist/js/bootstrap.js"> </script> 
 <script> 
  $(document).ready(function () { $('.dropdown-toggle').dropdown(); }) //Dropdown Menu Functionality Stupid bootstrap...
  </script>
 </body>
-
 </html>

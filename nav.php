@@ -9,6 +9,8 @@ function curPageName()
 include 'connect.php';
 
 $overviewActive = '';
+$roomActive = '';
+$floorActive = '';
 $dropdown = 0;
 $counterRooms = 1;
 if (curPageName() == "index.php")
@@ -17,7 +19,7 @@ if (curPageName() == "index.php")
 }
 if (curPageName() == "room.php")
 {
-	$notyet = '';
+	$roomActive = '';
 }
 
 
@@ -41,9 +43,10 @@ if (curPageName() == "room.php")
 			if($dropdown == 0 && $floor['ID'] != 0){
 				$dropdown = 1;
 				$floorNumber = $floor['ID'];
-				echo "<li class='dropdown'>
-          			  <a href='#' class='dropdown-toggle' data-toggle='dropdown'>Floor $floorNumber<b class='caret'></b></a>
-          	<ul class='dropdown-menu'>";
+				$floorDesc = $floor['Description'];
+				echo "<li class='dropdown' id='floor$floorNumber'>
+          			  <a href='#' class='dropdown-toggle' data-toggle='dropdown'>$floorDesc<b class='caret'></b></a>
+					  <ul class='dropdown-menu'>";
 			
 			}
 			$floorID = $floor['ID'];
@@ -53,8 +56,18 @@ if (curPageName() == "room.php")
 				if ($roomRow != ""){
 					$roomDesc = $roomRow['Description'];
 					$roomID = $roomRow['ID'];
-				echo "<li><a href='#' class='room' onclick='doPost(this.id)' id='$counterRooms'>$roomDesc</a></li>";
+					if(!empty($_POST['SelectedItem'])){
+						if($_POST['SelectedItem'] == $roomID){
+							?><script type="text/javascript">
+								$('#floor1').addClass('dropdown active');
+							</script>
+							<?PHP
+							$roomActive = " class='active'";
+						}
+					}
+				echo "<li".$roomActive."><a href='#' class='room' onclick='doPost(this.id)' id='$roomID'>$roomDesc</a></li>";
 				$counterRooms++;
+				$roomActive = "";
 								}
 			}
 			If ($dropdown == 1){
@@ -86,29 +99,7 @@ if (curPageName() == "room.php")
 <input type="hidden" id="postItem" name="SelectedItem" value="-1" />
 </form>
 
-
-
-  <?PHP 
-  /*
-  $roomCounter = 1;
-	$Requery = "select * from Floors where ID > 0";
-	$results2 = mysqli_query($link, $Requery);
-	while($floor = mysqli_fetch_assoc($results2)){
-				$dropdown = 1;
-				$floorID = $floor['ID'];
-				$queryRooms = "select * from Rooms where Floor_ID = $floorID";
-				$roomsResults = mysqli_query($link, $queryRooms);
-			while($roomRow = mysqli_fetch_assoc($roomsResults)){
-					$roomDesc = $roomRow['Description'];
-					$roomID = $roomRow['ID'];
-				echo "<input type='hidden' name='room".$roomCounter."' value='$roomID'>";	
-				$roomCounter++;
-	}
-}
-*/
-?>
 <script type="text/javascript">
-
 function doPost(clickedID){
 var x=clickedID;
 console.log(x);
